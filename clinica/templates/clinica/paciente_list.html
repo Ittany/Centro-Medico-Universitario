@@ -1,0 +1,46 @@
+{% extends "clinica/base.html" %}
+
+{% block content %}
+<h1>Pacientes</h1>
+
+<p>
+    <a class="btn" href="{% url 'clinica:paciente_create' %}">Registrar paciente</a>
+</p>
+
+<form method="get" style="margin-bottom:1rem">
+    <input type="text" name="q" placeholder="Buscar por DNI, nombres o apellidos"
+           value="{{ request.GET.q }}" style="padding:0.6rem;border:1px solid #D9E2EC;border-radius:8px">
+    <button type="submit">Buscar</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Tipo</th>
+            <th>Edad</th>
+            <th>Email</th>
+            <th>Historial</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente.dni }}</td>
+            <td>{{ paciente.nombres }}</td>
+            <td>{{ paciente.apellidos }}</td>
+            <td>{{ paciente.get_tipo_display }}</td>
+            <td>{{ paciente.edad }}</td>
+            <td>{{ paciente.email }}</td>
+            <td>
+                <a class="btn btn-secondary" href="{% url 'clinica:historial' paciente.pk %}">Ver</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7">No hay pacientes registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

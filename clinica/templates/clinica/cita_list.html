@@ -1,0 +1,53 @@
+{% extends "clinica/base.html" %}
+
+{% block content %}
+<h1>Citas médicas</h1>
+
+{% if perms.clinica.agendar_cita %}
+    <p><a class="btn" href="{% url 'clinica:cita_create' %}">Nueva cita</a></p>
+{% endif %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Médico</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cita in citas %}
+        <tr>
+            <td>{{ cita.paciente }}</td>
+            <td>{{ cita.medico }}</td>
+            <td>{{ cita.fecha }}</td>
+            <td>{{ cita.hora }}</td>
+            <td>
+                <span class="badge badge-{{ cita.estado }}">{{ cita.get_estado_display }}</span>
+            </td>
+            <td>
+                {% if cita.estado == "pendiente" %}
+                    <form method="post" action="{% url 'clinica:cita_cancel' cita.pk %}" style="display:inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-danger">Cancelar</button>
+                    </form>
+                    <a class="btn btn-secondary" href="{% url 'clinica:consulta_create' cita.pk %}">
+                        Registrar consulta
+                    </a>
+                {% endif %}
+                <a class="btn btn-warning" href="{% url 'clinica:historial' cita.paciente.pk %}">
+                    Historial
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No hay citas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

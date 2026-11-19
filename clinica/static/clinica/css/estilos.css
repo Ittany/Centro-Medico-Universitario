@@ -1,0 +1,273 @@
+:root {
+    --uncp-verde: #006B3F;
+    --uncp-verde-oscuro: #004C2C;
+    --uncp-amarillo: #F2C200;
+    --uncp-azul: #003366;
+    --uncp-gris: #F4F6F8;
+    --texto: #1F2933;
+    --borde: #D9E2EC;
+    --peligro: #B42318;
+    --exito: #067647;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--uncp-gris);
+    color: var(--texto);
+}
+
+.topbar {
+    background: linear-gradient(90deg, var(--uncp-verde), var(--uncp-verde-oscuro));
+    color: white;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 5px solid var(--uncp-amarillo);
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+}
+
+.nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav a, .nav button.link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.nav a:hover, .nav button.link:hover {
+    color: var(--uncp-amarillo);
+}
+
+.container {
+    max-width: 1150px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 51, 102, 0.08);
+    padding: 1.5rem;
+    border-top: 5px solid var(--uncp-verde);
+}
+
+h1, h2, h3 {
+    color: var(--uncp-azul);
+    margin-top: 0;
+}
+
+.btn, button {
+    display: inline-block;
+    background: var(--uncp-verde);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 0.65rem 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover, button:hover {
+    background: var(--uncp-verde-oscuro);
+}
+
+.btn-warning {
+    background: var(--uncp-amarillo);
+    color: #2B2B2B;
+}
+
+.btn-danger {
+    background: var(--peligro);
+}
+
+.btn-secondary {
+    background: var(--uncp-azul);
+}
+
+.form-card {
+    max-width: 760px;
+}
+
+.field {
+    margin-bottom: 1rem;
+}
+
+.field label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: var(--uncp-azul);
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: 3px solid rgba(242, 194, 0, 0.35);
+    border-color: var(--uncp-amarillo);
+}
+
+.error {
+    color: var(--peligro);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    font-weight: 600;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.messages li {
+    padding: 0.85rem 1rem;
+    border-radius: 9px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.messages .success {
+    background: #D1FADF;
+    color: var(--exito);
+}
+
+.messages .error {
+    background: #FEE4E2;
+    color: var(--peligro);
+}
+
+.messages .warning {
+    background: #FEF0C7;
+    color: #7A4D00;
+}
+
+.messages .info {
+    background: #D1E9FF;
+    color: var(--uncp-azul);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(0, 51, 102, 0.06);
+}
+
+th {
+    background: var(--uncp-azul);
+    color: white;
+    text-align: left;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 0.75rem 0.8rem;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: top;
+}
+
+tr:hover td {
+    background: #F8FAFC;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.badge-pendiente {
+    background: #FEF0C7;
+    color: #7A4D00;
+}
+
+.badge-completada {
+    background: #D1FADF;
+    color: var(--exito);
+}
+
+.badge-cancelada {
+    background: #FEE4E2;
+    color: var(--peligro);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+}
+
+.metric {
+    background: white;
+    border-radius: 14px;
+    padding: 1.2rem;
+    border-left: 6px solid var(--uncp-amarillo);
+    box-shadow: 0 8px 22px rgba(0, 51, 102, 0.07);
+}
+
+.metric strong {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--uncp-verde);
+}
+
+.login-wrap {
+    max-width: 430px;
+    margin: 4rem auto;
+}
+
+.login-logo {
+    text-align: center;
+    color: var(--uncp-verde);
+    font-weight: 900;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 700px) {
+    table {
+        font-size: 0.85rem;
+    }
+    .topbar {
+        align-items: flex-start;
+    }
+}

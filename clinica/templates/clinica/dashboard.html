@@ -1,0 +1,49 @@
+{% extends "clinica/base.html" %}
+
+{% block content %}
+<h1>Panel principal</h1>
+<p>Bienvenido(a) al sistema de gestión de consultas médicas del Centro Médico UNCP.</p>
+
+<div class="grid">
+    <div class="metric">
+        <span>Pacientes</span>
+        <strong>{{ total_pacientes }}</strong>
+    </div>
+    <div class="metric">
+        <span>Médicos</span>
+        <strong>{{ total_medicos }}</strong>
+    </div>
+    <div class="metric">
+        <span>Citas registradas</span>
+        <strong>{{ total_citas }}</strong>
+    </div>
+    <div class="metric">
+        <span>Citas pendientes</span>
+        <strong>{{ citas_pendientes }}</strong>
+    </div>
+    {% if mis_citas_pendientes is not None %}
+    <div class="metric">
+        <span>Mis citas pendientes</span>
+        <strong>{{ mis_citas_pendientes }}</strong>
+    </div>
+    {% endif %}
+    {% if mis_citas is not None %}
+    <div class="metric">
+        <span>Mis citas</span>
+        <strong>{{ mis_citas }}</strong>
+    </div>
+    {% endif %}
+</div>
+
+<div class="card" style="margin-top:1.5rem">
+    <h2>Accesos rápidos</h2>
+    <a class="btn" href="{% url 'clinica:cita_list' %}">Ver citas</a>
+    {% if perms.clinica.agendar_cita %}
+        <a class="btn btn-warning" href="{% url 'clinica:cita_create' %}">Agendar cita</a>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'clinica:paciente_list' %}">Pacientes</a>
+    {% if perms.clinica.generar_reportes %}
+        <a class="btn btn-secondary" href="{% url 'clinica:reportes' %}">Reportes</a>
+    {% endif %}
+</div>
+{% endblock %}

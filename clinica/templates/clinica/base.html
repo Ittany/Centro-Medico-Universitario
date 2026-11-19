@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Centro Médico UNCP</title>
+    <link rel="stylesheet" href="{% static 'clinica/css/estilos.css' %}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Centro Médico UNCP</div>
+        <nav class="nav">
+            {% if user.is_authenticated %}
+                <a href="{% url 'clinica:dashboard' %}">Inicio</a>
+                <a href="{% url 'clinica:cita_list' %}">Citas</a>
+                {% if perms.clinica.agendar_cita %}
+                    <a href="{% url 'clinica:cita_create' %}">Nueva cita</a>
+                {% endif %}
+                <a href="{% url 'clinica:paciente_list' %}">Pacientes</a>
+                <a href="{% url 'clinica:medico_list' %}">Médicos</a>
+                {% if perms.clinica.generar_reportes %}
+                    <a href="{% url 'clinica:reportes' %}">Reportes</a>
+                {% endif %}
+                <span>{{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="link">Salir</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}">Ingresar</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

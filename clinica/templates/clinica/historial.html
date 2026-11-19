@@ -1,0 +1,45 @@
+{% extends "clinica/base.html" %}
+
+{% block content %}
+<h1>Historial clínico</h1>
+
+<div class="card">
+    <h2>{{ paciente.apellidos }}, {{ paciente.nombres }}</h2>
+    <p><strong>DNI:</strong> {{ paciente.dni }}</p>
+    <p><strong>Tipo:</strong> {{ paciente.get_tipo_display }}</p>
+    <p><strong>Edad:</strong> {{ paciente.edad }} años</p>
+    <p><strong>Email:</strong> {{ paciente.email }}</p>
+    <p><strong>Alergias:</strong> {{ paciente.alergias|default:"Ninguna" }}</p>
+</div>
+
+<h2 style="margin-top:1.5rem">Consultas registradas</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha consulta</th>
+            <th>Médico</th>
+            <th>Diagnóstico</th>
+            <th>Tratamiento</th>
+            <th>Medicamentos</th>
+            <th>Próxima cita</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consulta in consultas %}
+        <tr>
+            <td>{{ consulta.creado_en|date:"d/m/Y H:i" }}</td>
+            <td>{{ consulta.cita.medico }}</td>
+            <td>{{ consulta.diagnostico }}</td>
+            <td>{{ consulta.tratamiento }}</td>
+            <td>{{ consulta.medicamentos }}</td>
+            <td>{{ consulta.proxima_cita|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Este paciente aún no tiene consultas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
